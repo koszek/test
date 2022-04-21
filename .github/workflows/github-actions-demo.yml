@@ -11,8 +11,8 @@ jobs:
       - name: Prepare docker
         uses: docker/setup-buildx-action@v1
       - run: docker
-      - run: ./gradlew.sh build
-      - run: gradlew docker
-      - run: gradlew dockerRun
+      - run: ${{ github.workspace }}/gradlew.sh build
+      - run: ${{ github.workspace }}/gradlew docker
+      - run: ${{ github.workspace }}/gradlew dockerRun
       - run: gradlew integrationTest
       - run: echo "done"
