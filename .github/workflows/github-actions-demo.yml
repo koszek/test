@@ -10,10 +10,8 @@ jobs:
       - run: echo "The workflow is now ready to test your code on the runner."
       - name: Prepare docker
         uses: docker/setup-buildx-action@v1
-      - name: List files in the repository
-        run: |
-          docker
-      - run: gradlew build
+      - run: docker
+      - run: ./gradlew.sh build
       - run: gradlew docker
       - run: gradlew dockerRun
       - run: gradlew integrationTest
