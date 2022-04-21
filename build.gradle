@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.palantir.docker' version '0.30.0'
+    id 'com.palantir.docker-run' version '0.30.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:testcontainers:1.16.3'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+docker {
+    name "${project.name}:${project.version}"
+    files 'build/libs/demo-0.0.1-SNAPSHOT.jar'
+//	tag 'DockerHub', "tkgregory/gradle-docker-example:${project.version}"
+}
+
+dockerRun {
+    name "${project.name}"
+    image "${project.name}:${project.version}"
+    ports '8888:8888'
+    clean true
+}
+
+testing {
+    suites {
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project
+                implementation 'org.springframework.boot:spring-boot-starter-test'
+                implementation 'org.testcontainers:testcontainers:1.16.3'
+            }
+        }
+    }
+}
