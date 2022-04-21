@@ -25,7 +25,7 @@ class IntegrationTest {
                 + simpleWebServer.getContainerIpAddress()
                 + ":" + simpleWebServer.getMappedPort(8888) + "/test";
         String response = simpleGetRequest(address);
-        assertEquals(response, "test");
+        assertEquals(response, "test1");
     }
 
     @After
