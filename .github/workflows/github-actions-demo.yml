@@ -14,5 +14,5 @@ jobs:
       - run: ${{ github.workspace }}/gradlew build
       - run: ${{ github.workspace }}/gradlew docker
       - run: ${{ github.workspace }}/gradlew dockerRun
-      - run: gradlew integrationTest
+      - run: ${{ github.workspace }}/gradlew integrationTest
       - run: echo "done"
