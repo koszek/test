@@ -1,13 +1,11 @@
-name: GitHub Actions Demo
+name: Test branch in docker
 on: [ push ]
 jobs:
-  Explore-GitHub-Actions:
+  test-in-docker:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "The workflow is now ready to test your code on the runner."
       - name: Prepare docker
         uses: docker/setup-buildx-action@v1
       - run: ${{ github.workspace }}/gradlew build
